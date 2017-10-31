@@ -15,6 +15,7 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		JumpAgainstBalls_Xamarin\JumpAgainstBalls_Xamarin\JumpAgainstBalls_Xamarin.projitems*{2a2627e9-6ba8-45e2-a40b-9356d0f4964b}*SharedItemsImports = 13
 		JumpAgainstBalls_Xamarin\JumpAgainstBalls_Xamarin\JumpAgainstBalls_Xamarin.projitems*{4a86dc20-ece4-4e76-96b8-b49363ab8e12}*SharedItemsImports = 4
+		JumpAgainstBalls_Xamarin\JumpAgainstBalls_Xamarin\JumpAgainstBalls_Xamarin.projitems*{b94124a7-82cb-4d50-ad22-4d867eb997a8}*SharedItemsImports = 4
 		JumpAgainstBalls_Xamarin\JumpAgainstBalls_Xamarin\JumpAgainstBalls_Xamarin.projitems*{fcff81f0-e9b2-4bd9-8ec3-d1fe136e7748}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

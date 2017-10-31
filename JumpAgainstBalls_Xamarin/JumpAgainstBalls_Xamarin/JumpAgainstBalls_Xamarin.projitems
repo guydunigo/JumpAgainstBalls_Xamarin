@@ -12,9 +12,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Ball.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BallPlayer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameThreadObj.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Tools.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage.xaml">
