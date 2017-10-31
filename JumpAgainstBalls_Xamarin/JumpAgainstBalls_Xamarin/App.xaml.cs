@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading;
 using Xamarin.Forms;
 
 namespace JumpAgainstBalls_Xamarin
 {
 	public partial class App : Application
-	{
-		public App ()
+    {
+
+        public App ()
 		{
 			InitializeComponent();
 
@@ -18,17 +19,25 @@ namespace JumpAgainstBalls_Xamarin
 
 		protected override void OnStart ()
 		{
-			// Handle when your app starts
+            // Handle when your app starts
 		}
 
 		protected override void OnSleep ()
 		{
-			// Handle when your app sleeps
-		}
+            // Handle when your app sleeps
+            if (MainPage is MainPage mp)
+            {
+                mp.StopThread();
+            }
+        }
 
 		protected override void OnResume ()
 		{
-			// Handle when your app resumes
-		}
-	}
+            // Handle when your app resumes
+            if (MainPage is MainPage mp)
+            {
+                mp.StartThread();
+            }
+        }
+    }
 }

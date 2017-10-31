@@ -8,7 +8,7 @@
             <Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="CenterAndExpand" />
-            <GameView/>
+            <GameView x:Name="View"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

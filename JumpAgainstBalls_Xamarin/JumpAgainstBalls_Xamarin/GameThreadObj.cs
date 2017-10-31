@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace JumpAgainstBalls_Xamarin
 {
     class GameThreadObj
     {
-        public volatile BallPlayer Player { get; set; }
-        public volatile List<Ball> Balls { get; set; }
-        public volatile Ball[] LeftBalls { get; set; }
-        public volatile Ball[] RightBalls { get; set; }
-        public volatile float[] Accel { get; set; }
-        public volatile long OffsetY { get; set; }
-        public volatile bool IsDemo { get; set; }
-        public volatile bool AllSet { get; set; }
-        public volatile long Time { get; set; }
-        public volatile bool StopRequested { get; set; }
-        public volatile GameView View { get; set; }
+        public BallPlayer Player { get; set; }
+        public List<Ball> Balls { get; set; }
+        public Ball[] LeftBalls { get; set; }
+        public Ball[] RightBalls { get; set; }
+        public float[] Accel { get; set; }
+        public long OffsetY { get; set; }
+        public bool IsDemo { get; set; }
+        public bool AllSet { get; set; }
+        public long Time { get; set; }
+        public bool StopRequested { get; set; }
+        public GameView View { get; set; }
         
         public GameThreadObj(
             GameView v,
@@ -49,7 +50,29 @@ namespace JumpAgainstBalls_Xamarin
                 {
 
                 }
+
+                Thread.Sleep(Tools.STEPTIME);
             }
+        }
+
+        public void StopThread(Thread thread)
+        {
+            if (thread != null)
+            {
+                StopRequested = true;
+                thread.Join();
+            }
+        }
+
+        public Thread StartThread(Thread thread = null)
+        {
+            StopRequested = false;
+            if (thread == null)
+            {
+                thread = new Thread(this.GameLoop);
+            }
+            thread.Start();
+            return thread;
         }
     }
 }

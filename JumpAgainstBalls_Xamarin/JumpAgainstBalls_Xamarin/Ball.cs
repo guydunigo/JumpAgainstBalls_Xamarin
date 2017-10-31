@@ -1,4 +1,6 @@
-﻿namespace JumpAgainstBalls_Xamarin
+﻿using Xamarin.Forms;
+
+namespace JumpAgainstBalls_Xamarin
 {
     class Ball
     {
@@ -32,7 +34,7 @@
             }
         }
 
-        public int Color { get; set; }
+        public Color Color { get; set; }
 
         public Ball(float radius = 100)
         {
