@@ -4,11 +4,8 @@
              xmlns:local="clr-namespace:JumpAgainstBalls_Xamarin"
              x:Class="JumpAgainstBalls_Xamarin.MainPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+        <local:GameView x:Name="View"
                 VerticalOptions="CenterAndExpand"
-                HorizontalOptions="CenterAndExpand" />
-            <GameView x:Name="View"/>
-        </StackLayout>
+                HorizontalOptions="CenterAndExpand"/>
     </ContentPage.Content>
 </ContentPage>

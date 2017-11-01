@@ -39,8 +39,7 @@ namespace JumpAgainstBalls_Xamarin
         public Ball(float radius = 100)
         {
             Radius = radius;
-            X = 0;
-            Y = 0;
+            Pos = new float[] { 0, 0 };
         }
 
         public bool IsVisible(float height, long offset)
