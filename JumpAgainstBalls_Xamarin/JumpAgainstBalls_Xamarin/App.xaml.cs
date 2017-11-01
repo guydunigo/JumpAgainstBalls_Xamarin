@@ -20,7 +20,11 @@ namespace JumpAgainstBalls_Xamarin
 		protected override void OnStart ()
 		{
             // Handle when your app starts
-		}
+            if (MainPage is MainPage mp)
+            {
+                mp.StartThread();
+            }
+        }
 
 		protected override void OnSleep ()
 		{

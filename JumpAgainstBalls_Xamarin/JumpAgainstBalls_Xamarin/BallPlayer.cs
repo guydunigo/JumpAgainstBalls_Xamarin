@@ -47,8 +47,7 @@ namespace JumpAgainstBalls_Xamarin
                 float[] normal = { 0, 0 };
                 float[] unorm = { 0, 0 };
                 float norm = 0;
-
-                float[] pos = { X, Y };
+                
                 float[] new_pos = { X, Y };
                 float[] other_pos = { X, Y };
                 float[] new_cel = { X, Y };
@@ -59,7 +58,7 @@ namespace JumpAgainstBalls_Xamarin
                 for (i = 0; i < 2; i++)
                 {
                     new_cel[i] = cel[i] + gravity[i] * dt;
-                    new_pos[i] = pos[i] + new_cel[i] * dt;
+                    new_pos[i] = Pos[i] + new_cel[i] * dt;
                 }
                 
                 // Colliding against walls
@@ -114,7 +113,7 @@ namespace JumpAgainstBalls_Xamarin
 
                 // Actually update values
                 cel = new_cel;
-                pos = new_pos;
+                Pos = new_pos;
             }
 
             return collided;

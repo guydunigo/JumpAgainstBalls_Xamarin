@@ -25,23 +25,31 @@ namespace JumpAgainstBalls_Xamarin
                 Y = 500,
                 Color = Color.Cyan
             };
+            balls = new List<Ball>();
 
             var view = this.FindByName<GameView>("View");
             if (view != null)
             {
-                threadObj = new GameThreadObj(view, player, balls, false);
+                view.Player = player;
+                view.Balls = balls;
+
+                threadObj = new GameThreadObj(view, player, balls, false)
+                {
+                    Accel = new float[] { 0, 10 }
+                };
+                thread = threadObj.CreateThread();
             }
         }
 
         public void StartThread()
         {
-            threadObj.StartThread(thread);
+            threadObj.StartThread(ref thread);
         }
         
         public void StopThread()
         {
-            threadObj.StopThread(thread);
-            thread = null;
+            threadObj.StopThread(ref thread);
+            // thread = null;
         }
     }
 }

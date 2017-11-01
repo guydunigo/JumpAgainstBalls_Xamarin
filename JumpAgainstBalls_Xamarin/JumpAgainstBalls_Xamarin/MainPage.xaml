@@ -4,8 +4,12 @@
              xmlns:local="clr-namespace:JumpAgainstBalls_Xamarin"
              x:Class="JumpAgainstBalls_Xamarin.MainPage">
     <ContentPage.Content>
-        <local:GameView x:Name="View"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="CenterAndExpand"/>
+        <StackLayout
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand">
+            <local:GameView x:Name="View"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand"/>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
