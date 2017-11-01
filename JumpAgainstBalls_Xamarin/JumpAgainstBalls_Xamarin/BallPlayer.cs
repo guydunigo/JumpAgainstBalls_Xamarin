@@ -60,27 +60,6 @@ namespace JumpAgainstBalls_Xamarin
                     new_cel[i] = cel[i] + gravity[i] * dt;
                     new_pos[i] = Pos[i] + new_cel[i] * dt;
                 }
-                
-                // Colliding against walls
-                if (new_pos[0] - Radius < 0 || new_pos[0] + Radius > width || new_pos[1] + Radius > height)
-                {
-                    if (new_pos[0] - Radius < 0)
-                    { // Left
-                        new_pos[0] = Radius;
-                        new_cel[0] = 0;
-                    }
-                    else if (new_pos[0] + Radius > width)
-                    { // Right
-                        new_pos[0] = width - Radius;
-                        new_cel[0] = 0;
-                    }
-
-                    if (new_pos[1] + Radius > height)
-                    { // Bottom
-                        new_pos[1] = height - Radius;
-                        new_cel[1] = - new_cel[1];
-                    }
-                }
 
                 // Bouncing against other balls
                 foreach (Ball other in balls)
@@ -101,6 +80,27 @@ namespace JumpAgainstBalls_Xamarin
                         }
 
                         collided = true;
+                    }
+                }
+
+                // Colliding against walls
+                if (new_pos[0] - Radius < 0 || new_pos[0] + Radius > width || new_pos[1] + Radius > height)
+                {
+                    if (new_pos[0] - Radius < 0)
+                    { // Left
+                        new_pos[0] = Radius;
+                        new_cel[0] = 0;
+                    }
+                    else if (new_pos[0] + Radius > width)
+                    { // Right
+                        new_pos[0] = width - Radius;
+                        new_cel[0] = 0;
+                    }
+
+                    if (new_pos[1] + Radius > height)
+                    { // Bottom
+                        new_pos[1] = height - Radius;
+                        new_cel[1] = - new_cel[1];
                     }
                 }
 
