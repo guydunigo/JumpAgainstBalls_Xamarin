@@ -4,16 +4,16 @@ namespace JumpAgainstBalls_Xamarin
 {
     class Ball
     {
-        public float[] Pos { get; set; }
+        public double[] Pos { get; set; }
 
-        public float X {
+        public double X {
             get => Pos[0];
             set
             {
                 Pos[0] = value;
             }
         }
-        public virtual float Y
+        public virtual double Y
         {
             get => Pos[1];
             set
@@ -22,8 +22,8 @@ namespace JumpAgainstBalls_Xamarin
             }
         }
 
-        private float radius;
-        public float Radius {
+        private double radius;
+        public double Radius {
             get => radius;
             set
             {
@@ -36,15 +36,15 @@ namespace JumpAgainstBalls_Xamarin
 
         public Color Color { get; set; }
 
-        public Ball(float radius = 100)
+        public Ball(double radius = 100)
         {
             Radius = radius;
-            Pos = new float[] { 0, 0 };
+            Pos = new double[] { 0, 0 };
         }
 
-        public bool IsVisible(float height, long offset)
+        public bool IsVisible(double height, long offset)
         {
-            return (Y - Radius + offset >= 0 && Y + Radius + offset <= height);
+            return (Y + Radius + offset >= 0 && Y - Radius + offset <= height);
         }
     }
 }

@@ -35,30 +35,37 @@ namespace JumpAgainstBalls_Xamarin
 
         private void CanvasView_PaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
-            var surface = args.Surface;
-            var canvas = surface.Canvas;
-            var offsetY = ThreadObj.OffsetY;
+            var canvas = args.Surface.Canvas;
 
             canvas.Clear();
 
             if (Player != null)
             {
-                canvas.DrawCircle(
-                    Player.X,
-                    Player.Y + offsetY,
-                    Player.Radius,
-                    new SKPaint() { Color = Extensions.ToSKColor(Player.Color) });
+                lock (Player)
+                {
+                    canvas.DrawCircle(
+                        (float)Player.X,
+                        (float)(Player.Y + ThreadObj.OffsetY),
+                        (float)Player.Radius,
+                        new SKPaint() { Color = Extensions.ToSKColor(Player.Color) });
+                }
             }
 
             if (Balls != null)
             {
                 foreach (Ball b in Balls)
                 {
-                    canvas.DrawCircle(
-                        b.X,
-                        b.Y + offsetY,
-                        b.Radius,
-                        new SKPaint() { Color = Extensions.ToSKColor(b.Color) });
+                    lock(b)
+                    {
+                        if (b.IsVisible(HeightF, ThreadObj.OffsetY))
+                        {
+                            canvas.DrawCircle(
+                                (float)b.X,
+                                (float)(b.Y + ThreadObj.OffsetY),
+                                (float)b.Radius,
+                                new SKPaint() { Color = Extensions.ToSKColor(b.Color) });
+                        }
+                    }
                 }
             }
         }

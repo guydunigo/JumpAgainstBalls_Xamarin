@@ -5,11 +5,11 @@ namespace JumpAgainstBalls_Xamarin
 {
     class BallPlayer : Ball
     {
-        private float[] cel;
+        private double[] cel;
 
-        private float maxHeight;
+        private double maxHeight;
 
-        public override float Y
+        public override double Y
         {
             get => base.Y;
             set
@@ -22,36 +22,36 @@ namespace JumpAgainstBalls_Xamarin
             }
         }
 
-        public BallPlayer(float radius = 100): base(radius)
+        public BallPlayer(double radius = 100): base(radius)
         {
-            cel = new float[] { 0, 0 };
+            cel = new double[] { 0, 0 };
             maxHeight = 0;
         }
 
-        public String ConvertMaxHeightToM(float height)
+        public String ConvertMaxHeightToM(double height)
         {
             return Tools.ConvertHeightToM(height, maxHeight);
         }
 
-        public String ConvertHeightToM(float height)
+        public String ConvertHeightToM(double height)
         {
             return Tools.ConvertHeightToM(height, Y);
         }
 
-        public bool Step(float dt, float[] gravity, float width, float height, List<Ball> balls)
+        public bool Step(double dt, double[] gravity, double width, double height, List<Ball> balls)
         {
             bool collided = false;
 
             if (width > 0 && height > 0)
             {
-                float[] normal = { 0, 0 };
-                float[] unorm = { 0, 0 };
-                float norm = 0;
+                double[] normal = { 0, 0 };
+                double[] unorm = { 0, 0 };
+                double norm = 0;
                 
-                float[] new_pos = { X, Y };
-                float[] other_pos = { X, Y };
-                float[] new_cel = { X, Y };
-                float tmp_cel = 0;
+                double[] new_pos = { X, Y };
+                double[] other_pos = { X, Y };
+                double[] new_cel = { X, Y };
+                double tmp_cel = 0;
 
                 int i = 0;
 
@@ -88,7 +88,7 @@ namespace JumpAgainstBalls_Xamarin
                     other_pos = other.Pos;
                     normal = Tools.GetVector(other_pos, new_pos);
                     norm = Tools.GetNorm(normal);
-                    float radSum = Radius + other.Radius;
+                    double radSum = Radius + other.Radius;
                     if (norm < radSum)
                     {
                         unorm = Tools.GetUnitVector(normal, norm);

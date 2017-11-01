@@ -35,7 +35,7 @@ namespace JumpAgainstBalls_Xamarin
 
                 view.ThreadObj = threadObj = new GameThreadObj(view, player, balls, false)
                 {
-                    Accel = new float[] { 0, 10 }
+                    Accel = new double[] { 0, Tools.ACCEL_Y }
                 };
                 thread = threadObj.CreateThread();
             }
@@ -49,7 +49,6 @@ namespace JumpAgainstBalls_Xamarin
         public void StopThread()
         {
             threadObj.StopThread(ref thread);
-            // thread = null;
         }
     }
 }

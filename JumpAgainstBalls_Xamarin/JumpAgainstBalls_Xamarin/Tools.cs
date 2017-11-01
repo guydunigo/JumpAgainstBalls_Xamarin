@@ -9,37 +9,37 @@ namespace JumpAgainstBalls_Xamarin
         public const int ACCEL_Y = 10;
         public const int ACCEL_X_COEF = -3;
 
-        public const float TIMEFACTOR = 1 / 50.0f;
+        public const double TIMEFACTOR = 1/50.0;
         public const int LIMIT_CELL = 1;
-        public const float BALLS_BOUNCE_COEF = 1.5f;
+        public const double BALLS_BOUNCE_COEF = 1.5f;
 
-        public static float GetNorm(float[] vect)
+        public static double GetNorm(double[] vect)
         {
-            return (float)Math.Sqrt(vect[0] * vect[0] + vect[1] * vect[1]);
+            return Math.Sqrt(vect[0] * vect[0] + vect[1] * vect[1]);
         }
-        public static float[] GetVector(float[] pt0, float[] pt1)
+        public static double[] GetVector(double[] pt0, double[] pt1)
         {
-            return new float[] { pt1[0] - pt0[0], pt1[1] - pt0[1] };
-        }
-
-        public static float[] GetUnitVector(float[] pt0, float[] pt1)
-        {
-            float[] normal = GetVector(pt0, pt1);
-            float norm = GetNorm(normal);
-            return new float[] { normal[0] / norm, normal[1] / norm };
+            return new double[] { pt1[0] - pt0[0], pt1[1] - pt0[1] };
         }
 
-        public static float[] GetUnitVector(float[] normal, float norm)
+        public static double[] GetUnitVector(double[] pt0, double[] pt1)
         {
-            return new float[] { normal[0] / norm, normal[1] / norm };
+            double[] normal = GetVector(pt0, pt1);
+            double norm = GetNorm(normal);
+            return new double[] { normal[0] / norm, normal[1] / norm };
         }
 
-        public static long ConvertHeight(float height, float y)
+        public static double[] GetUnitVector(double[] normal, double norm)
+        {
+            return new double[] { normal[0] / norm, normal[1] / norm };
+        }
+
+        public static long ConvertHeight(double height, double y)
         {
             return (long)(-(y - height) / 10);
         }
 
-        public static String ConvertHeightToM(float height, float y)
+        public static String ConvertHeightToM(double height, double y)
         {
             return ConvertHeight(height, y).ToString() + "m";
         }

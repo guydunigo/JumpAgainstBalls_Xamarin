@@ -12,7 +12,7 @@ namespace JumpAgainstBalls_Xamarin
         public List<Ball> Balls { get; set; }
         public Ball[] LeftBalls { get; set; }
         public Ball[] RightBalls { get; set; }
-        public float[] Accel { get; set; }
+        public double[] Accel { get; set; }
         public long OffsetY { get; set; }
         public bool IsDemo { get; set; }
         private bool allSet;
@@ -32,12 +32,40 @@ namespace JumpAgainstBalls_Xamarin
             Balls = bs;
             IsDemo = demo;
 
-            Accel = new float[] { 0, 0 };
+            Accel = new double[] { 0, 0 };
             OffsetY = 0;
             allSet = false;
             Time = 0;
             ResizeRequested = false;
             StopRequested = false;
+        }
+
+        private void UpdateSideBall(Ball[] balls)
+        {
+            var topBall = balls[0];
+            Ball lowBall = balls[0];
+
+            foreach (Ball b in balls)
+            {
+                if (b.Y < topBall.Y)
+                {
+                    topBall = b;
+                }
+                else if (b.Y > lowBall.Y)
+                {
+                    lowBall = b;
+                }
+            }
+
+            var height = View.HeightF;
+            if (!topBall.IsVisible(height, OffsetY) && lowBall.Y < Player.Y)
+            {
+                topBall.Y = - OffsetY + height + (new Random()).NextDouble() * View.Height / 2;
+            }
+            else if (!lowBall.IsVisible(height, OffsetY) && topBall.Y > Player.Y)
+            {
+                lowBall.Y = - OffsetY - height / 2 - (new Random()).NextDouble() * height / 2;
+            }
         }
 
         public void GameLoop(Object obj)
@@ -49,7 +77,7 @@ namespace JumpAgainstBalls_Xamarin
                     break;
                 }
 
-                if (View.Width > 0 && View.Height > 0)
+                if (View.WidthF > 0 && View.HeightF > 0)
                 {
                     if (!allSet)
                     {
@@ -89,14 +117,17 @@ namespace JumpAgainstBalls_Xamarin
                         Player.Step(Tools.STEPTIME * Tools.TIMEFACTOR, Accel, View.WidthF, View.HeightF, Balls);
                     }
 
+                    UpdateSideBall(LeftBalls);
+                    UpdateSideBall(RightBalls);
+
                     // update offset :
-                    if (Player.Y + OffsetY < View.Height / 3)
+                    if (Player.Y + OffsetY < View.HeightF / 3)
                     {
-                        OffsetY = (long)(View.Height / 3 - Player.Y);
+                        OffsetY = (long)(View.HeightF / 3 - Player.Y);
                     }
-                    else if (Player.Y + Player.Radius + OffsetY > 2 / 3.0 * View.Height)
+                    else if (Player.Y + OffsetY > 2 / 3.0 * View.HeightF)
                     {
-                        OffsetY = (long)(2 / 3.0 * View.Height - Player.Y - Player.Radius);
+                        OffsetY = (long)(2 / 3.0 * View.HeightF - Player.Y);
                     }
 
                     // Modifying UI needs to be done on main thread :
