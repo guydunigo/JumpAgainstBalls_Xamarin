@@ -17,6 +17,7 @@ namespace JumpAgainstBalls_Xamarin
         public bool IsDemo { get; set; }
         private bool allSet;
         public long Time { get; set; }
+        public bool ResizeRequested { get; set; }
         public bool StopRequested { get; set; }
         public GameView View { get; set; }
 
@@ -35,6 +36,7 @@ namespace JumpAgainstBalls_Xamarin
             OffsetY = 0;
             allSet = false;
             Time = 0;
+            ResizeRequested = false;
             StopRequested = false;
         }
 
@@ -73,6 +75,14 @@ namespace JumpAgainstBalls_Xamarin
 
                         allSet = true;
                     }
+                    else if (ResizeRequested)
+                    {
+                        foreach (Ball b in RightBalls)
+                        {
+                            b.X = View.WidthF - 30;
+                        }
+                        ResizeRequested = false;
+                    }
                     
                     lock(Player)
                     {
@@ -90,25 +100,21 @@ namespace JumpAgainstBalls_Xamarin
                     }
 
                     // Modifying UI needs to be done on main thread :
-                    Xamarin.Forms.Device.BeginInvokeOnMainThread(() => View.ReDraw(OffsetY));
+                    Device.BeginInvokeOnMainThread(() => View.ReDraw());
                 }
 
                 Thread.Sleep(Tools.STEPTIME);
             }
-
-            View.Txt.Text = "Loop Broken";
         }
 
         public void StopThread(ref Thread thread)
         {
-            View.Txt.Text = "Thread stopping";
             if (thread != null)
             {
                 StopRequested = true;
                 thread.Join();
             }
             thread = null;
-            View.Txt.Text = "Thread stopped";
         }
 
         public Thread StartThread(ref Thread thread)
@@ -119,13 +125,11 @@ namespace JumpAgainstBalls_Xamarin
                 thread = new Thread(GameLoop);
             }
             thread.Start();
-            View.Txt.Text = "Thread started";
             return thread;
         }
 
         public Thread CreateThread()
         {
-            View.Txt.Text = "Thread created";
             return new Thread(GameLoop);
         }
     }
