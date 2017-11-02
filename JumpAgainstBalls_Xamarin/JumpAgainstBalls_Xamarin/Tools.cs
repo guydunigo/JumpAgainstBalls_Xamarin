@@ -10,7 +10,8 @@ namespace JumpAgainstBalls_Xamarin
         public const int ACCEL_X_COEF = -3;
 
         public const double TIMEFACTOR = 1/50.0;
-        public const int LIMIT_CELL = 1;
+        public const int LIMIT_CELL_MIN = 1;
+        public const int LIMIT_CELL_MAX = 1000;
         public const double BALLS_BOUNCE_COEF = 1.5f;
 
         public static double GetNorm(double[] vect)

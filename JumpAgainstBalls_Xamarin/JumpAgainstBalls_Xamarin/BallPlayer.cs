@@ -107,8 +107,10 @@ namespace JumpAgainstBalls_Xamarin
                 // Nullify the celerity when too low
                 for (i = 0; i < 2; i++)
                 {
-                    if (Math.Abs(new_cel[i]) <= Tools.LIMIT_CELL)
+                    if (Math.Abs(new_cel[i]) <= Tools.LIMIT_CELL_MIN)
                         new_cel[i] = 0;
+                    else if (Math.Abs(new_cel[i]) > Tools.LIMIT_CELL_MAX)
+                        new_cel[i] = Tools.LIMIT_CELL_MAX * Math.Sign(new_cel[i]);
                 }
 
                 // Actually update values
